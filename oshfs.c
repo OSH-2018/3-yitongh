@@ -181,6 +181,8 @@ static void freeblock(uint32_t block)
 
 static int create_filenode(const char *path, const struct stat *st)
 {
+    if (get_fileindex(path))
+        return -EEXIST;
     char filepath[strlen(path)];
     strcpy(filepath, path);
     uint32_t father_index;
